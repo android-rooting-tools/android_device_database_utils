@@ -1,4 +1,4 @@
-device\_database\_utils
+android\_device\_database\_utils
 =================
 
 To get root or unlock security, we need to know device address. Our new rooting and unlocking tools use device.db file by device\_database library (android\_device\_database repository) to store address in sqlite3 database format. But it is too hard to manage address by SQL statement, so tools in this repository will help you.
