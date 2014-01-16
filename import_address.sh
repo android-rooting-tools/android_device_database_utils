@@ -18,8 +18,8 @@ echo "Import address from '$FILE'"
 
 while read line
 do
-  NAME=`echo $line | sed -e 's/|/ /g' | awk '{print $1}'`
-  VALUE=`echo $line | sed -e 's/|/ /g' | awk '{print $2}'`
+  NAME=`echo $line | "$BUSYBOX" sed -e 's/|/ /g' | "$BUSYBOX" awk '{print $1}'`
+  VALUE=`echo $line | "$BUSYBOX" sed -e 's/|/ /g' | "$BUSYBOX" awk '{print $2}'`
   echo $NAME: $VALUE
 
   echo "insert into device_address(device_id, name, value) values($DEVICE_ID, '$NAME', $VALUE);" \
