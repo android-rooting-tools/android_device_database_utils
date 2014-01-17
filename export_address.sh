@@ -4,7 +4,7 @@
 if [ z"$DEVICE_ID" != z ]; then
   echo "Export address to '$FILE'"
   SQL="select name, value from device_address where device_id=$DEVICE_ID;"
-  echo "$SQL" | "$SQLITE3" device.db > "$FILE"
+  echo "$SQL" | "$SQLITE3" "$DEVICE_DB" > "$FILE"
   exit $?
 else
   exit 1

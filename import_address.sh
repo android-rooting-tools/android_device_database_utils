@@ -7,7 +7,7 @@ if [ ! -f "$FILE" ]; then
   echo "Error: not found file to import: '$FILE'"
 
   SQL="delete from supported_devices where device_id=$DEVICE_ID;"
-  echo "$SQL" | "$SQLITE3" device.db
+  echo "$SQL" | "$SQLITE3" "$DEVICE_DB"
 
   exit 1;
 fi
@@ -23,7 +23,7 @@ do
   echo $NAME: $VALUE
 
   echo "insert into device_address(device_id, name, value) values($DEVICE_ID, '$NAME', $VALUE);" \
-    | "$SQLITE3" device.db
+    | "$SQLITE3" "$DEVICE_DB"
 
 done < "$FILE"
 

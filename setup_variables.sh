@@ -11,6 +11,15 @@ if [ ! -x "$SQLITE3" ]; then
   exit 1
 fi
 
+DEVICE_DB=device.db
+if [ ! -w "$DEVICE_DB" ]; then
+  DEVICE_DB=/data/local/tmp/device.db
+  if [ ! -w "$DEVICE_DB" ]; then
+    echo "Make sure install \"device.db\" from device_database!"
+    exit 1
+  fi
+fi
+
 DEVICE=`getprop ro.product.model`
 BUILD_ID=`getprop ro.build.display.id`
 
@@ -19,7 +28,7 @@ if [ z"$CHECK_PROP_NAME" == z ]; then
       where device='$DEVICE' and build_id='$BUILD_ID' \
       and check_property_name is not null;"
 
-  CHECK_PROP_NAME=`echo "$SQL" | "$SQLITE3" device.db | "$BUSYBOX" head -n 1`
+  CHECK_PROP_NAME=`echo "$SQL" | "$SQLITE3" "$DEVICE_DB" | "$BUSYBOX" head -n 1`
 fi
 
 if [ z"$CHECK_PROP_NAME" == z ]; then
@@ -40,7 +49,7 @@ SQL="select device_id from supported_devices \
     where device='$DEVICE' and build_id='$BUILD_ID' \
     and $CHECK_COND;"
 
-DEVICE_ID=`echo "$SQL" | "$SQLITE3" device.db`
+DEVICE_ID=`echo "$SQL" | "$SQLITE3" "$DEVICE_DB"`
 
 if [ z"$DEVICE_ID" == z ]; then
   DEVICE_ID=10000
@@ -51,7 +60,7 @@ if [ z"$DEVICE_ID" == z ]; then
         check_property_name, check_property_value) \
         values ($DEVICE_ID, '$DEVICE', '$BUILD_ID', $CHECK_VALUES); "
 
-    echo "$SQL" | "$SQLITE3" device.db 2>setup_variables.log && break
+    echo "$SQL" | "$SQLITE3" "$DEVICE_DB" 2>setup_variables.log && break
 
     DEVICE_ID=`expr $DEVICE_ID + 1`
 
