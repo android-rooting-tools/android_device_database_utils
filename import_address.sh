@@ -22,7 +22,7 @@ do
   VALUE=`echo $line | "$BUSYBOX" sed -e 's/|/ /g' | "$BUSYBOX" awk '{print $2}'`
   echo $NAME: $VALUE
 
-  echo "insert into device_address(device_id, name, value) values($DEVICE_ID, '$NAME', $VALUE);" \
+  echo "insert into device_address(device_id, name, value) values($DEVICE_ID, '$NAME', '$VALUE');" \
     | "$SQLITE3" "$DEVICE_DB"
 
 done < "$FILE"
