@@ -14,7 +14,7 @@ To get root or unlock security, we need to know device address. Our new rooting 
 
 - export_address.sh
 
-    Export all address for the device to text file format. Some device needs extra proprety name to detect unique device build such as `ro.lge.swversion` for LG devices, `ro.aa.romver` for HTC devices and so on.  File name will be `model name`\_`build id`.txt or `model name`\_`build id`\_`extra property name`\_`extra property value`.txt if extra proprety name is needed.
+    Export all address for the device to text file format. Some devices needs extra property name to detect unique device build such as `ro.lge.swversion` for LG devices, `ro.aa.romver` for HTC devices and so on.  File name will be `model name`\_`build id`.txt or `model name`\_`build id`\_`extra property name`\_`extra property value`.txt if extra property name is needed.
 
 - import_address.sh [extra property name]
 
@@ -26,11 +26,11 @@ To get root or unlock security, we need to know device address. Our new rooting 
 
 - setup_variables.sh
 
-    Do not use it directory, this is setup script used by tools above.
+    Do not use this directly, it is a setup script used by tools above.
 
 # How to use:
 1. Install tools into directory you want to run them on.
-2. Place device.db file to manage into tools direcytory.
+2. Place device.db file to manage into tools directory.
 3. Move into tools directory and run tool in adb shell.
 
 # For examples:
