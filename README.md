@@ -22,7 +22,7 @@ To get root or unlock security, we need to know device address. Our new rooting 
 
 - set_address.sh [name] [value]
 
-    Manually set address for the the device.
+    Manually set address for the device.
 
 - setup_variables.sh
 
